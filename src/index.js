@@ -1,31 +1,20 @@
 import './styles/styles.css';
 
-const plusBtn = document.querySelector('.plus');
-const minusBtn = document.querySelector('.minus');
-const textContainer = document.querySelector('span');
+const taskInput = document.getElementById('task');
+const displayField = document.getElementById('display');
+const btnElmt = document.getElementById('add');
 
-let data = 0;
-
-function add() {
-  const value = Math.floor(Math.random() * 1000);
-  data = Math.max(data, value);
-  return value;
+function addTask(input = taskInput.value) {
+  const taskArray = [];
+  taskArray.push(input);
+  return input;
 }
 
-function sub() {
-  const value = Math.floor(Math.random() * 1000);
-  data = Math.min(data, value);
-  return value;
+function display() {
+  displayField.innerHTML += `<li>${addTask()}</li>`;
 }
 
-function displayValue(now, text = data) {
-  textContainer.innerHTML = `${text} (${now})`;
-}
-
-plusBtn.addEventListener('click', () => {
-  displayValue(add());
-});
-
-minusBtn.addEventListener('click', () => {
-  displayValue(sub());
+btnElmt.addEventListener('click', () => {
+  display(taskInput);
+  taskInput.value = '';
 });
